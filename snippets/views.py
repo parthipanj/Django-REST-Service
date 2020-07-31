@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import permissions, renderers, viewsets
+from rest_framework import permissions, renderers, viewsets, generics, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -35,3 +35,22 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class ExplorationViewSet(generics.RetrieveAPIView):
+    
+    def get(self, request, *args, **kwargs):
+        print(dir(request))
+        print('*** Request ***')
+        print('Method: {}'.format(request.method))
+        print('Content Type: {}'.format(request.content_type))
+        print('Stream: {}'.format(request.stream))
+        print('Data: {}'.format(request.data))
+        print('Query Params: {}'.format(request.query_params))
+        print('User: {}'.format(request.user))
+        print('Auth: {}'.format(request.auth))
+        print('Authenticators: {}'.format(request.authenticators))
+        # print('Meta: {}'.format(request.META))
+        print('Session: {}'.format(request.session))
+
+        return Response(status=status.HTTP_200_OK)

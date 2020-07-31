@@ -11,4 +11,5 @@ router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('exploration', views.ExplorationViewSet.as_view(), name='workaround')
 ]
